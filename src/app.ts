@@ -69,12 +69,16 @@ app.patch("/note/:id", async (req: Request, res: Response) => {
   const noteId = req.params.id;
   const updateBody = req.body;
 
-  const notes = await Note.findByIdAndUpdate(noteId, updateBody);
+  // const note = await Note.findByIdAndUpdate(noteId, updateBody, { new: true });
+  // const note = await Note.updateOne({ _id: noteId }, updateBody, { new: true });
+  const note = await Note.findOneAndUpdate({ _id: noteId }, updateBody, {
+    new: true,
+  });
 
   res.status(201).json({
     success: true,
     message: "note update successfully",
-    notes,
+    note,
   });
 });
 
