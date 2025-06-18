@@ -15,7 +15,7 @@ const noteSchema = new Schema<INotes>(
       default: false,
     },
     tags: {
-      label: { type: String, required: true },
+      label: { type: String, required: true }, 
       color: { type: String, default: "gray" },
     },
   },

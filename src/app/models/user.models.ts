@@ -27,7 +27,6 @@ const userSchema = new Schema<IUser>({
     //   },
     //   message: (props) => `${props.value} is not a valid email!`,
     // },
-
     validate: [validator.isEmail, "invalid email sent {VALUE}"],
   },
   age: {
@@ -48,6 +47,11 @@ const userSchema = new Schema<IUser>({
     },
     default: "USER",
     uppercase: true,
+  },
+  address: {
+    city: { type: String },
+    street: { type: String },
+    zip: { type: Number },
   },
 });
 
