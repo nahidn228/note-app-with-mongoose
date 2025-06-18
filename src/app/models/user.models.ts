@@ -19,7 +19,13 @@ const userSchema = new Schema<IUser>({
     required: true,
     trim: true,
     lowercase: true,
-    unique: true,
+    unique: [true, "Email should be unique"],
+    validate: {
+      validator: function (value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      },
+      message: (props) => `${props.value} is not a valid email!`,
+    },
   },
   age: {
     type: Number,
@@ -33,7 +39,10 @@ const userSchema = new Schema<IUser>({
   },
   role: {
     type: String,
-    enum: ["USER", "ADMIN", "SUPERADMIN"],
+    enum: {
+      values: ["USER", "ADMIN", "SUPERADMIN"],
+      message: "Role should be USER ADMIN and SUPERADMIN... ",
+    },
     default: "USER",
     uppercase: true,
   },
